@@ -17,7 +17,7 @@ python bbserver.py
 {
     "temp": 22.1,
     "rh": 55,
-    "timestamp": YYYY-MM-DDTHH:MM:SSZ
+    "timestamp": "YYYY-MM-DDTHH:MM:SSZ"
 }
 ```
 
