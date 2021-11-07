@@ -15,8 +15,8 @@ python bbserver.py
 
 ```json
 {
-    "temp": 22.1
-    "rh":
+    "temp": 22.1,
+    "rh": 55,
     "timestamp": YYYY-MM-DDTHH:MM:SSZ
 }
 ```
