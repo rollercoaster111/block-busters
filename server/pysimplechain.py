@@ -104,6 +104,7 @@ class Block:
 class SimpleChain:
     def __init__(self):
         self.chain = []
+        self.chain_idx = {}
 
     def add_block(self, block):
         """ Add a block if valid."""
@@ -111,7 +112,9 @@ class SimpleChain:
             block.prev_hash = self.chain[-1].hash
         block.seal()
         block.validate()
+
         self.chain.append(block)
+        self.chain_idx[block.hash] = len(self.chain) - 1
 
     def validate(self):
         """ Validates each block, in order.
@@ -123,6 +126,9 @@ class SimpleChain:
             except InvalidBlock as exc:
                 raise InvalidBlockchain("Invalid blockchain at block number {} caused by: {}".format(i, str(exc)))
         return True
+
+    def get_block(self, hash):
+        return self.chain[self.chain_idx[hash]]
 
     def __repr__(self):
         return 'SimpleChain<blocks: {}>'.format(len(self.chain))

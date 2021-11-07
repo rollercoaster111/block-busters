@@ -32,7 +32,7 @@ def add_block():
             json.dumps({
                 'status': 'ok',
                 'message': 'block added',
-                'hash': block._hash_block()
+                'hash': block.hash
             })
 
 
@@ -42,6 +42,14 @@ def show_chain():
         jsonify([b.__repr__() for b in chain.chain]) # chain.__repr__())
 
 
+@app.route('/<block_hash>')
+def show_block(block_hash):
+    return \
+        chain.get_block(block_hash).__repr__()
+
+
 if __name__ == '__main__':
     chain = SimpleChain()
+    chain_map = {}
+
     app.run()
