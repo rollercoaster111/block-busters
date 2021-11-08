@@ -2,6 +2,7 @@ from flask import Flask
 from flask import request, jsonify
 import json
 from pysimplechain import Block, SimpleChain, Message
+import yaml
 
 app = Flask(__name__)
 
@@ -58,4 +59,10 @@ if __name__ == '__main__':
     chain = SimpleChain()
     chain_map = {}
 
-    app.run()
+    try:
+        with open('config.yaml', 'r') as file:
+            base_config = yaml.safe_load(file)
+            server, port = base_config['server'], base_config['port']
+            app.run(server, port=port)
+    except Exception as e:
+        print(f"[error] make sure your 'config.yaml' is in the app root folder : {e}")
