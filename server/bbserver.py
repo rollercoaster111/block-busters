@@ -2,6 +2,7 @@ from flask import Flask
 from flask import request, jsonify
 import json
 from pysimplechain import Block, SimpleChain, Message
+import yaml
 
 app = Flask(__name__)
 
@@ -19,7 +20,6 @@ def info():
 @app.route('/add', methods=['POST'])
 def add_block():
     post_data = request.get_json()
-
     block = Block()
     block.add_message(Message(
         json.dumps(
@@ -29,7 +29,7 @@ def add_block():
     chain.add_block((block))
 
     return \
-            json.dumps({
+            jsonify({
                 'status': 'ok',
                 'message': 'block added',
                 'hash': block.hash
@@ -39,17 +39,30 @@ def add_block():
 @app.route('/chain')
 def show_chain():
     return \
-        jsonify([b.__repr__() for b in chain.chain]) # chain.__repr__())
+        jsonify([b.hash for b in chain.chain]) # chain.__repr__())
 
 
 @app.route('/<block_hash>')
 def show_block(block_hash):
     return \
-        chain.get_block(block_hash).__repr__()
+        jsonify(
+            [
+            chain.get_block(block_hash).hash,
+            chain.get_block(block_hash).prev_hash,
+            [m.data for m in chain.get_block(block_hash).messages],
+            str(chain.get_block(block_hash).timestamp)
+            ]
+        )
 
 
 if __name__ == '__main__':
     chain = SimpleChain()
     chain_map = {}
 
-    app.run()
+    try:
+        with open('config.yaml', 'r') as file:
+            base_config = yaml.safe_load(file)
+            server, port = base_config['server'], base_config['port']
+            app.run(server, port=port)
+    except Exception as e:
+        print(f"[error] make sure your 'config.yaml' is in the app root folder : {e}")
