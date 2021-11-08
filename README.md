@@ -8,6 +8,9 @@ Our goal is to leverage city data stream(s) from IoT devices to build a re-usabl
 
 
 # Why Use a Blockchain in St. Louis City
+Blockchain technology can provide a highly digitalized, advanced and sustainable urban management model for mobility, energy efficiency, waste treatment and citizen participation in the city of St. Louis.  
+
+According to Blockchain4Cities researchers, the most important benefits of blockchain for running cities include:
 
 ![Why BlockChain](https://user-images.githubusercontent.com/53341084/140822178-0e1c95b2-e0ed-4ab3-962c-f7238647616b.PNG)
 
