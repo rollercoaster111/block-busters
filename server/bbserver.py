@@ -19,7 +19,6 @@ def info():
 @app.route('/add', methods=['POST'])
 def add_block():
     post_data = request.get_json()
-
     block = Block()
     block.add_message(Message(
         json.dumps(
@@ -29,7 +28,7 @@ def add_block():
     chain.add_block((block))
 
     return \
-            json.dumps({
+            jsonify({
                 'status': 'ok',
                 'message': 'block added',
                 'hash': block.hash
@@ -39,13 +38,20 @@ def add_block():
 @app.route('/chain')
 def show_chain():
     return \
-        jsonify([b.__repr__() for b in chain.chain]) # chain.__repr__())
+        jsonify([b.hash for b in chain.chain]) # chain.__repr__())
 
 
 @app.route('/<block_hash>')
 def show_block(block_hash):
     return \
-        chain.get_block(block_hash).__repr__()
+        jsonify(
+            [
+            chain.get_block(block_hash).hash,
+            chain.get_block(block_hash).prev_hash,
+            [m.data for m in chain.get_block(block_hash).messages],
+            str(chain.get_block(block_hash).timestamp)
+            ]
+        )
 
 
 if __name__ == '__main__':
