@@ -2,7 +2,7 @@
 
 ![BB](https://user-images.githubusercontent.com/53341084/140821024-16a82f21-e005-4cea-b47c-5f7068a43503.png)
 
-# About
+# Our Goal
 Our goal is to leverage city data stream(s) from IoT devices to build a re-usable blockchain based application that supports smart contracts, traceability, and data sovereignty for the benefit and incentivization of city residents.
 
 
@@ -13,6 +13,7 @@ Blockchain technology can provide a highly digitalized, advanced and sustainable
 According to Blockchain4Cities researchers, the most important benefits of blockchain for running cities include:
 
 ![Why BlockChain](https://user-images.githubusercontent.com/53341084/140822178-0e1c95b2-e0ed-4ab3-962c-f7238647616b.PNG)
+(Reference: https://www.iberdrola.com/innovation/blockchain-for-smart-cities-urban-management)
 
 
 
